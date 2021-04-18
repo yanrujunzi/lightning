@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/xadmin.css">
+    <title>layuiAdmin</title>
+</head>
+<body>
+<div class="main">
+
+    <!--上方标题栏-->
+    <div class="parentTop">
+        <a href="#" class="appName">减肥系统</a>
+        <div class="loginNameDiv">
+            <img class="loginIcon" src="image/icon.png">
+            <div class="loginUserInfo" @click="loginNameDiv">
+                <span>{{account}}</span><br>
+                <span>{{roleName}}</span>
+            </div>
+        </div>
+    </div>
+
+    <!--左侧菜单-->
+    <div class="leftMenu">
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed" v-for="item1 in menuData" v-if="item1.level==1">
+                <a href="javascript:;">{{item1.name}}</a>
+                <dl class="layui-nav-child">
+                    <dd v-for="item2 in menuData" v-if="item2.level==2 && item2.parentId==item1.id">
+                        <a @click="addTab(item2.name,item2.url,true,$event)" :data-url="item2.url">
+                            <cite>{{item2.name}}</cite>
+                        </a>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <!-- 右侧主体开始 -->
+    <div class="page-content">
+        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+            <ul class="layui-tab-title">
+                <li class="home">
+                    <i class="layui-icon">&#xe68e;</i>{{'首页'}}
+                </li>
+            </ul>
+            <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                <dl>
+                    <dd data-type="this">{{'关闭当前'}}</dd>
+                    <dd data-type="other">{{'关闭其它'}}</dd>
+                    <dd data-type="all">{{'关闭全部'}}</dd>
+                </dl>
+            </div>
+            <div class="layui-tab-content" id="indexiframe">
+                <div class="layui-tab-item layui-show" >
+                    <iframe src='./html/index.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                </div>
+            </div>
+            <div id="tab_show"></div>
+        </div>
+    </div>
+
+
+    <!--设置弹框-->
+    <div class="dialogMenu">
+        <div id="parentChangePassword" class="dialogMenu-item" @click="editPassword" >修改密码</div>
+        <div id="parentExit" class="dialogMenu-item" @click="backToLogin">退出</div>
+    </div>
+
+    <script type="text/html" id="dialogChangePassword">
+        <form class="layui-form" id="dialogChangePasswordForm" style="margin-top:30px;padding-right:30px;">
+            <div class="layui-form-item">
+            <label class="layui-form-label">新密码</label>
+            <div class="layui-input-block">
+            <input id="newpassword" type="password" name="newPassword"
+        placeholder="请输入新密码" class="layui-input">
+            </div>
+            </div>
+            <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-block">
+            <input id="confirmpassword" type="password" name="okPassword"
+        placeholder="请重复输入密码" class="layui-input">
+            </div>
+            </div>
+            </form>
+    </script>
+
+
+</div>
+
+</body>
+</html>
+
+<script src="js/jquery.min.js"></script>
+<script src="lib/layui/layui.all.js"></script>
+<script type="text/javascript" src="./js/xadmin.js"></script>
+<script src="js/utils.js"></script>
+<script type="text/javascript" src="./lib/vue/vue.js"></script>
+<script type="text/javascript" src="./js/config.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+<script type="text/javascript" src="./js/formValidation.js"></script>
+<script src="js/index.js"></script>

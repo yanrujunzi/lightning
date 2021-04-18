@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.healthy.body.dao.BodyChangeLogDao" >
+
+
+    <sql id="sqlWhere">
+        <if test="name != null and name.trim()!= ''">
+            and a.`name` like '${name}%'
+        </if>
+        <if test="relationship != null and relationship.trim()!= ''">
+            and a.`relationship` like '${relationship}%'
+        </if>
+        <if test="idBodyLog != null ">
+            and a.id_body = #{idBody}
+        </if>
+        <if test="idBody != null ">
+            and a.id_body_log = #{idBodyLog}
+        </if>
+        <if test="dateRecord != null and dateRecord.trim()!= ''">
+            and a.date_record = #{dateRecord}
+        </if>
+    </sql>
+
+    <select id="queryList" resultType="com.healthy.body.entity.BodyChangeLogEntity" parameterType="java.util.Map">
+        select
+        *
+        from body_change_log a
+        where 1=1
+        <include refid="sqlWhere"></include>
+        <choose>
+            <when test="orderName != null and orderName.trim() != ''">
+                order by ${orderName} ${order}
+            </when>
+            <otherwise>
+                order by date_record desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="queryTotal" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select
+        count(id_body_log)
+        from body_change_log a
+        where 1=1
+        <include refid="sqlWhere"></include>
+    </select>
+
+
+</mapper>

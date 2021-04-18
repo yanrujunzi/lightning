@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.healthy.food.dao.FoodManageDao" >
+
+
+    <sql id="sqlWhere">
+        <if test="name != null and name.trim()!= ''">
+            and a.`name` like '${name}%'
+        </if>
+        <if test="idFood != null">
+            and a.`id_food` = '${idFood}'
+        </if>
+    </sql>
+
+    <select id="queryList" resultType="com.healthy.food.entity.FoodManageEntity" parameterType="java.util.Map">
+        select
+        *
+        from food_manage a
+        where 1=1
+        <include refid="sqlWhere"></include>
+        <choose>
+            <when test="orderName != null and orderName.trim() != ''">
+                order by ${orderName} ${order}
+            </when>
+            <otherwise>
+                order by id_food desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="queryTotal" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select
+        count(id_food)
+        from food_manage a
+        where 1=1
+        <include refid="sqlWhere"></include>
+    </select>
+
+
+</mapper>

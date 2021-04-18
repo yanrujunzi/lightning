@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+	<meta charset="UTF-8">
+	<title>xxx</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+</head>
+<body>
+<script src="../../js/public-source.js"></script>
+<div class="x-body" id="container" v-cloak>
+
+    <div class="conditions-box">
+        <div class="form-group">
+            <div class="input-group form-group-sm">
+                <span class="input-group-addon">姓名</span>
+                <input type="text" class="form-control" v-model="q.bodyName" @keyup.enter="reload" placeholder="姓名" autocomplete="off">
+            </div>
+        </div>
+		<div class="form-group">
+			<div class="input-group form-group-sm">
+				<span class="input-group-addon">进食日期</span>
+				<input type="text" class="form-control" v-model="q.grubTime"
+					   id="qGrubTime" placeholder="进食日期" autocomplete="off">
+			</div>
+		</div>
+        <button type="button" class="layui-btn layui-btn-normal" @click.prevent="reload" >查询<i class="icon iconfont">&#xe618;</i></button>
+		<button type="reset" class="layui-btn layui-btn-primary" @click.prevent="reset" >重置<i class="icon iconfont">&#xe628;</i></button>
+    </div>
+
+
+    <div class="table-box">
+        <!--表格头部操作-->
+        <div class="layui-btn-group table-handle">
+            <button class="layui-btn layui-btn-normal" @click="add"
+                    data-type="getCheckData"><i class="icon iconfont">&#xe616;</i>新增
+            </button>
+            <button class="layui-btn layui-btn-normal" @click="update"
+                    data-type="getCheckLength" ><i
+                    class="icon iconfont">&#xe627;</i>编辑
+            </button>
+            <button class="layui-btn layui-btn-danger" @click="del"
+                    data-type="getCheckDel" ><i
+                    class="icon iconfont">&#xe625;</i>删除
+            </button>
+        </div>
+        <table class="layui-hide" id="tableData" ></table>
+        <!--表格内部操作-->
+        <script type="text/html" id="barTool">
+            <a class="table-inline-handle" @click="update"  lay-event="edit"><i
+                    class="icon iconfont">&#xe624;</i></a>
+            <a class="table-inline-handle" @click="del"  lay-event="del"><i
+                    class="icon iconfont">&#xe625;</i></a>
+        </script>
+    </div>
+
+	<div id="modeopen" class="write-box" style="display: none">
+		<div>
+			<div v-show="false">
+				<div>ID</div>
+				<div>
+					<input type="text" class="form-control " v-model="foodDayLog.idFoodLog" placeholder="ID" autocomplete="off">
+				</div>
+			</div>
+			<div v-show="false">
+				<div>ID</div>
+				<div>
+					<input type="text" class="form-control " v-model="foodDayLog.idUser" placeholder="ID" autocomplete="off">
+				</div>
+			</div>
+			<div v-show="false">
+				<div>ID</div>
+				<div>
+					<input type="text" class="form-control " v-model="foodDayLog.idBodyLog" placeholder="ID" autocomplete="off">
+				</div>
+			</div>
+			<div v-show="false">
+				<div>ID</div>
+				<div>
+					<input type="text" class="form-control " v-model="foodDayLog.idFood" placeholder="ID" autocomplete="off">
+				</div>
+			</div>
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>人员姓名</div>
+				<div>
+					<input type="text" class="form-control"  v-model="foodDayLog.bodyName" placeholder="人员姓名"
+						   autocomplete="off" id="bodyName" readonly="readonly" @click="selectBody">
+				</div>
+			</div>
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>食物名称</div>
+				<div>
+					<input type="text" class="form-control"  v-model="foodDayLog.foodName" placeholder="食物名称"
+						   autocomplete="off" id="foodName" readonly="readonly" @click="selectFood">
+				</div>
+			</div>
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>食用重量(克)</div>
+				<div>
+					<input type="text" class="form-control " v-model="foodDayLog.weight" placeholder="食用重量(克)"
+						   autocomplete="off" id="weight" >
+				</div>
+			</div>
+			<div v-show="false">
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>总热量(卡路里)</div>
+				<div>
+					<input type="text" class="form-control " v-model="foodDayLog.calorie" placeholder="总热量(卡路里)"
+						   autocomplete="off" id="calorie" >
+				</div>
+			</div>
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>进食日期</div>
+				<div>
+					<input id="grubTime" type="text" class="form-control " v-model="foodDayLog.grubTime" placeholder="进食日期" autocomplete="off" readonly="readonly">
+					<i></i>
+				</div>
+			</div>
+			<div v-show="false">
+				<div>创建时间</div>
+				<div>
+					<input type="text" class="form-control " v-model="foodDayLog.dateCreate" placeholder="创建时间">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="../../js/food/food_day_log.js"></script>
+</body>
+</html>

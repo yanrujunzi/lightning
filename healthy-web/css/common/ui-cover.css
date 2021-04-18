@@ -1,0 +1,320 @@
+/**
+常用蓝色
+ */
+/**
+常用边距
+ */
+/**
+常用title颜色
+ */
+body {
+  background: white;
+}
+.layui-nav-bar {
+  background-color: #4493fc !important;
+}
+.layui-form-select dl dd.layui-this {
+  background-color: #4493fc !important;
+}
+.layui-nav .layui-this:after,
+.layui-nav-bar,
+.layui-nav-tree .layui-nav-itemed:after {
+  background-color: #4493fc;
+}
+/**
+按钮样式修改
+ */
+.layui-btn {
+  padding: 0 16px;
+}
+.layui-btn-normal {
+  background-color: #4493fc !important;
+}
+.layui-btn-primary {
+  border: 1px solid #ebebeb;
+}
+.layui-btn-primary:hover {
+  border-color: #4493fc;
+}
+.layui-btn-positive {
+  background-color: #37ce65;
+}
+.layui-form-item .layui-input-inline {
+  margin-right: 16px;
+}
+.layui-btn + .layui-btn {
+  margin-left: 0;
+}
+.layui-btn:not(:last-of-type) {
+  margin-right: 16px;
+}
+.table-box {
+  padding: 16px;
+  overflow-y: auto;
+}
+.layui-table-view {
+  margin: 0;
+}
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+  background-color: #4493fc;
+}
+.layui-table-page {
+  font-size: 12px;
+}
+.layui-table-page .layui-laypage-limits select {
+  font-size: 12px;
+}
+.layui-laypage a:hover {
+  color: #4493fc;
+}
+.layui-table th {
+  background-color: #fafafa;
+}
+.layui-table td,
+.layui-table th {
+  min-width: 40px;
+}
+.layui-form-checked[lay-skin=primary] i {
+  border-color: #4493fc;
+  background-color: #4493fc;
+}
+.conditions-box {
+  padding: 16px;
+  padding-bottom: 0;
+  border-bottom: 1px solid #f5f5f5;
+  clear: both;
+  min-height: 62px;
+  overflow: hidden;
+}
+.conditions-box .form-group {
+  margin-bottom: 16px;
+  margin-right: 24px;
+  float: left;
+}
+.conditions-box .form-group .form-control {
+  min-width: 170px;
+}
+.conditions-box .form-group input,
+.conditions-box .form-group select,
+.conditions-box .form-group textarea {
+  border: 1px solid #ebebeb;
+}
+.conditions-box .input-group-addon {
+  width: auto;
+  border: 0;
+  text-align: left;
+  padding: 0;
+  padding-right: 10px;
+  background: transparent;
+}
+.conditions-box .form-group-box {
+  min-height: 46px;
+  clear: both;
+  float: left;
+  margin-right: 24px;
+}
+.conditions-box .form-group-box .form-group {
+  margin-right: 16px;
+}
+.conditions-box .form-group-box .form-group:last-of-type {
+  margin-right: 0;
+}
+.conditions-box .layui-btn {
+  float: left;
+  margin-bottom: 16px;
+  height: 30.4px;
+}
+.conditions-box .layui-btn i {
+  margin-left: 10px;
+}
+.table-handle {
+  padding-bottom: 0;
+  display: block !important;
+}
+.table-handle > button {
+  border-radius: 2px !important;
+  margin-bottom: 16px;
+}
+.table-handle .layui-btn + .layui-btn {
+  margin-left: 16px !important;
+}
+.table-handle .layui-btn i {
+  margin-right: 10px;
+}
+.table-inline-handle {
+  cursor: pointer;
+  margin-right: 8px;
+}
+.table-inline-handle:last-of-type {
+  margin-right: 0;
+}
+.table-inline-handle:hover {
+  color: #4493fc;
+}
+th .layui-table-cell {
+  text-overflow: inherit;
+}
+.layui-form-radio > i:hover,
+.layui-form-radioed > i {
+  color: #4493fc;
+}
+.layui-layer-title {
+  background-color: #fafafa;
+}
+.layui-tab {
+  margin: 0;
+}
+.layui-tab-content {
+  padding: 16px;
+}
+.layui-tab-card {
+  border-width: 0;
+  border-radius: 2px;
+  box-shadow: none;
+}
+.layui-tab-card > .layui-tab-title .layui-this {
+  color: #4290fd;
+}
+.write-box {
+  padding: 16px;
+}
+.write-box > div > div {
+  clear: both;
+  min-height: 34px;
+  margin-bottom: 16px;
+}
+.write-box > div > div > div {
+  min-height: 34px;
+  line-height: 34px;
+  float: left;
+}
+.write-box > div > div > div:first-of-type {
+  text-align: right;
+  width: 20%;
+}
+.write-box > div > div > div:last-of-type {
+  width: 60%;
+  padding-left: 10px;
+  color: #555555;
+}
+.write-box > div > div > div:last-of-type textarea {
+  margin: 0;
+  max-width: 100%;
+  min-height: 100px;
+}
+.write-box > div > div > div:last-of-type label {
+  font-weight: 500;
+}
+.write-box .write-box-open {
+  position: relative;
+}
+.write-box .write-box-open i {
+  position: absolute;
+  right: 3px;
+  top: 50%;
+  margin-top: -3px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  border-left: 6px solid #434343;
+}
+:not(input)[lengthlimit] {
+  position: relative;
+}
+:not(input)[lengthlimit] > div {
+  position: absolute;
+  right: 8px;
+  bottom: 0;
+  color: #CCCCCC;
+}
+input[type="radio"].new-radio + label,
+input[type="checkbox"].new-checkbox + label {
+  margin-right: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+input[type="radio"].new-radio + label::before {
+  content: "\a0";
+  /*不换行空格*/
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.4em;
+  border-radius: 50%;
+  border: 1px solid #4493fc;
+  text-indent: 0.15em;
+  line-height: 1;
+}
+input[type="checkbox"].new-checkbox + label::before {
+  vertical-align: middle;
+  font-size: 14px;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.4em;
+  border: 1px solid #4493fc;
+  text-indent: 0.15em;
+  line-height: 1;
+  border-radius: 2px;
+  content: "\e605";
+  color: #ffffff;
+}
+input[type="radio"].new-radio:checked + label::before {
+  background-color: #4493fc;
+  background-clip: content-box;
+  padding: 0.2em;
+}
+input[type="checkbox"].new-checkbox:checked + label::before {
+  color: #ffffff;
+  background-color: #4493fc;
+}
+input[type="radio"].new-radio,
+input[type="checkbox"].new-checkbox {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+.layui-tips-warning.layui-layer-tips .layui-layer-content {
+  color: #ffffff;
+  background-color: #ff5722;
+}
+.layui-tips-warning.layui-layer-tips .layui-layer-content i.layui-layer-TipsR {
+  border-bottom-color: #ff5722;
+}
+.layui-laydate-content td.laydate-selected {
+  background-color: #78b1fe !important;
+}
+.layui-laydate-footer span:hover {
+  color: #4493fc !important;
+}
+.layui-nav .layui-nav-child dd.layui-this a,
+.layui-nav-child dd.layui-this {
+  background-color: #4493fc;
+}
+.tab-box {
+  height: 100%;
+  width: 100%;
+}
+.tab-box .layui-tab-card {
+  height: 100%;
+  width: 100%;
+}
+.tab-box .layui-tab-content {
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 40px;
+}
+.btn-group.bootstrap-select .glyphicon.glyphicon-ok {
+  color: #4493fc;
+}
+.required-red {
+  color: #ff5722;
+  font-size: 8px !important;
+  margin-right: 4px;
+  position: relative;
+}
+.required-red:before {
+  position: relative;
+  top: -5px;
+  left: 3px;
+}
+/*# sourceMappingURL=ui-cover.css.map */

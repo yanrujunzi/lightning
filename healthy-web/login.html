@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        html,body{
+            height: 100%;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("image/login_bg.png");
+            background-size: cover;
+        }
+        #captchaImg{
+            height: 30px;
+            width: 100%;
+        }
+        .login-btn{
+            height: 40px;
+            width: 320px;
+            background-color: #009688;
+            border: none;
+            color: white;
+            border-radius: 3px;
+            display: inline-block;
+            vertical-align: middle;
+
+            text-align:center;
+        }
+        .login-btn p {
+            line-height:40px;
+            overflow:hidden;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container" class="login-div">
+    <h1>登录</h1>
+    <form id="login-form" >
+        <div class="login-form-item">
+            <input name="username" v-model="sysUser.account" placeholder="用户名">
+        </div>
+        <div class="login-form-item">
+            <input name="password" type="password" v-model="sysUser.password" placeholder="密码">
+        </div>
+        <div class="login-form-item">
+            <div class="layui-input-inline" style="width:50%;position: absolute">
+                <input type="text" placeholder="请输入验证码" v-model="captcha" />
+            </div>
+            <div class="layui-form-mid layui-word-aux" style="width:30%;float: right" ><img id="captchaImg" :src="imgData" @click="reloadCaptcha" title="点击刷新"></div>
+
+        </div>
+        <div class="login-btn" @click="login" ><p>登录</p></div>
+    </form>
+</div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jsencrypt.min.js"></script>
+<script src="lib/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="lib/vue/vue.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script>
+    var timeStr = new Date().getTime();
+    var str = '<script src="js/login.js?v='+timeStr+'"><\/script>';
+    document.write(str)
+</script>
+</body>
+</html>
+
+

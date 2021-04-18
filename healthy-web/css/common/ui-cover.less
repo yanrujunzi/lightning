@@ -1,0 +1,346 @@
+/**
+常用蓝色
+ */
+@border-color: #4493fc;
+/**
+常用边距
+ */
+@margin-normal: 16px;
+/**
+常用title颜色
+ */
+@title-color: #fafafa;
+
+body{
+    background: white;
+}
+.layui-nav-bar {
+    background-color: @border-color !important;
+}
+.layui-form-select dl dd.layui-this{
+    background-color: @border-color !important;
+}
+.layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after {
+    background-color:  @border-color;
+}
+/**
+按钮样式修改
+ */
+.layui-btn{
+
+    padding: 0 16px;
+}
+.layui-btn-normal{
+    background-color: @border-color !important;
+}
+.layui-btn-primary{
+    border: 1px solid #ebebeb;
+}
+
+.layui-btn-primary:hover{
+    border-color: @border-color;
+}
+.layui-btn-positive{
+    background-color: #37ce65;
+}
+
+.layui-form-item .layui-input-inline{
+    margin-right: @margin-normal;
+}
+.layui-btn+.layui-btn {
+    margin-left: 0;
+}
+.layui-btn:not(:last-of-type){
+    margin-right: @margin-normal;
+}
+
+//table
+.table-box{
+    padding: @margin-normal;
+    overflow-y: auto;
+}
+
+.layui-table-view{
+    margin: 0;
+}
+.layui-laypage .layui-laypage-curr .layui-laypage-em{
+    background-color: @border-color;
+}
+.layui-table-page{
+    font-size: 12px;
+    .layui-laypage-limits select{
+        font-size: 12px;
+    }
+}
+.layui-laypage a:hover {
+    color: @border-color;
+}
+.layui-table th{
+    background-color: @title-color;
+}
+.layui-table td,.layui-table th{
+    min-width: 40px;
+}
+.layui-form-checked[lay-skin=primary] i {
+    border-color: @border-color;
+    background-color: @border-color;
+}
+//搜索
+.conditions-box{
+    padding: 16px;
+    padding-bottom: 0;
+    border-bottom: 1px solid #f5f5f5;
+    clear: both;
+    min-height: 62px;
+    overflow: hidden;
+    .form-group{
+        margin-bottom: 16px;
+        margin-right: 24px;
+        float: left;
+        .form-control{
+            min-width: 170px;
+        }
+        input,select,textarea{
+            border: 1px solid #ebebeb;
+        }
+    }
+    .input-group-addon{
+        width: auto;
+        border: 0;
+        text-align: left;
+        padding: 0;
+        padding-right: 10px;
+        background: transparent;
+    }
+    .form-group-box{
+        min-height: 46px;
+        clear: both;
+        float: left;
+        .form-group{
+            margin-right: 16px;
+            &:last-of-type{
+                margin-right: 0;
+            }
+        }
+        margin-right: 24px;
+    }
+    .layui-btn{
+        float: left;
+        margin-bottom: 16px;
+        height: 30.4px;
+        i{
+            margin-left: 10px;
+        }
+    }
+}
+//表格公共操作
+.table-handle{
+    &>button{
+        border-radius: 2px !important;
+        margin-bottom: 16px;
+    }
+    .layui-btn+.layui-btn{
+        margin-left: 16px !important;
+    }
+    .layui-btn{
+        i{
+            margin-right: 10px;
+        }
+    }
+    padding-bottom: 0;
+    display: block !important;
+}
+.table-inline-handle{
+    cursor: pointer;
+    margin-right: 8px;
+    &:last-of-type{
+        margin-right: 0;
+    }
+    &:hover{
+        color: @border-color;
+    }
+}
+th .layui-table-cell{
+    text-overflow: inherit;
+}
+.layui-form-radio>i:hover, .layui-form-radioed>i {
+    color: @border-color;
+}
+//弹窗 open
+.layui-layer-title{
+    background-color: @title-color;
+}
+
+//弹窗选项卡
+.layui-tab{
+    margin: 0;
+}
+.layui-tab-content{
+    padding: @margin-normal;
+}
+.layui-tab-card {
+    border-width: 0;
+    border-radius: 2px;
+    box-shadow: none;
+}
+.layui-tab-card>.layui-tab-title .layui-this {
+    color: #4290fd;
+}
+//新增等输入框
+.write-box{
+    padding: @margin-normal;
+    &>div>div{
+        //overflow: hidden;
+        clear: both;
+        min-height: 34px;
+        margin-bottom: @margin-normal;
+        &>div{
+            min-height: 34px;
+            line-height: 34px;
+            float: left;
+            &:first-of-type{
+                text-align: right;
+                width: 20%;
+            }
+            &:last-of-type{
+                width: 60%;
+                padding-left: 10px;
+                textarea{
+                    margin: 0;
+                    max-width: 100%;
+                    min-height: 100px;
+                }
+                color: #555555;
+                label{
+                    font-weight: 500;
+                }
+
+            }
+        }
+    }
+    .write-box-open{
+        position: relative;
+        i{
+            position: absolute;
+            right: 3px;
+            top: 50%;
+            margin-top: -3px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            border-left: 6px solid #434343;
+        }
+
+    }
+}
+//textarea下面的计数
+:not(input)[lengthlimit]{
+    position: relative;
+    &>div{
+        position: absolute;
+        right: 8px;
+        bottom: 0;
+        color: #CCCCCC;
+    }
+}
+//radio
+input[type="radio"].new-radio + label,input[type="checkbox"].new-checkbox + label{
+    margin-right: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+input[type="radio"].new-radio + label::before {
+    content: "\a0"; /*不换行空格*/
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 16px;
+    width: 1em;
+    height: 1em;
+    margin-right: .4em;
+    border-radius: 50%;
+    border: 1px solid @border-color;
+    text-indent: .15em;
+    line-height: 1;
+}
+input[type="checkbox"].new-checkbox + label::before{
+    vertical-align: middle;
+    font-size: 14px;
+    width: 1em;
+    height: 1em;
+    margin-right: .4em;
+    border: 1px solid @border-color;
+    text-indent: .15em;
+    line-height: 1;
+    border-radius: 2px;
+    content: "\e605";
+    color: #ffffff;
+}
+input[type="radio"].new-radio:checked + label::before {
+    background-color: @border-color;
+    background-clip: content-box;
+    padding: .2em;
+
+}
+input[type="checkbox"].new-checkbox:checked + label::before {
+    color: #ffffff;
+    background-color: @border-color;
+}
+input[type="radio"].new-radio,input[type="checkbox"].new-checkbox {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+//tips
+.layui-tips-warning.layui-layer-tips{
+    .layui-layer-content{
+        color: #ffffff;
+        background-color: rgb(255, 87, 34);
+        i.layui-layer-TipsR{
+            border-bottom-color: rgb(255, 87, 34);
+        }
+    }
+}
+
+//时间控件
+.layui-laydate-content td.laydate-selected{
+    background-color: #78b1fe !important;
+}
+.layui-laydate-footer span:hover{
+    color: @border-color !important;
+}
+
+.layui-nav .layui-nav-child dd.layui-this a,.layui-nav-child dd.layui-this {
+    background-color: @border-color;
+}
+
+//设置设备详情tab 滚动
+.tab-box{
+    height: 100%;
+    width: 100%;
+    .layui-tab-card{
+        height: 100%;
+        width: 100%;
+    }
+    .layui-tab-content{
+        height: 100%;
+        overflow: auto;
+        padding-bottom: 40px;
+    }
+}
+
+//bootstrap 输入下拉框
+.btn-group.bootstrap-select{
+    .glyphicon.glyphicon-ok{
+        color: @border-color;
+    }
+}
+//必填的星号
+.required-red{
+    color: rgb(255, 87, 34);
+    font-size: 8px !important;
+    margin-right: 4px;
+    position: relative;
+    &:before{
+        position: relative;
+        top: -5px;
+        left: 3px;
+    }
+}

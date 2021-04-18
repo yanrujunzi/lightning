@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uni.user.dao.SysUserDao" >
+    <sql id="sqlWhere">
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id=#{tenantId}
+        </if>
+        <if test="account!=null and account!=''">
+            and account=#{account}
+        </if>
+        <if test="groupId!=null and groupId!=''">
+            and group_id=#{groupId}
+        </if>
+        <if test="userName!=null and userName!=''">
+            and username like concat('%',#{userName},'%')
+        </if>
+        <if test="mobile != null and mobile != ''">
+            and mobile like #{mobile}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and create_time > #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and #{endTime} > create_time
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+    </sql>
+    <select id="queryList" resultType="com.uni.user.entity.SysUserEntity" parameterType="java.util.Map">
+        select
+        *
+        from sys_user where 1=1
+        <include refid="sqlWhere"></include>
+        <if test="_sysGroup != null and _sysGroup.code != 'Super_Group'">
+            and group_id in (
+                SELECT
+                id
+                FROM
+                (
+                SELECT
+                @ids AS _ids,
+                ( SELECT @ids := GROUP_CONCAT( id ) FROM sys_group WHERE FIND_IN_SET( parent_id, @ids ) ) AS cids
+                FROM
+                sys_group,
+                ( SELECT @ids := #{_sysGroup.id} ) b
+                WHERE
+                @ids IS NOT NULL
+                ) ID,
+                sys_group DATA
+                WHERE
+                FIND_IN_SET( DATA.id, ID._ids )
+                ORDER BY
+                id
+            )
+        </if>
+        <choose>
+            <when test="orderName != null and orderName.trim() != ''">
+                order by ${orderName} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="queryTotal" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select
+        count(1)
+        from sys_user
+        where 1=1
+        <include refid="sqlWhere"></include>
+        <if test="_sysGroup != null and _sysGroup.code != 'Super_Group'">
+            and group_id in (
+            SELECT
+            id
+            FROM
+            (
+            SELECT
+            @ids AS _ids,
+            ( SELECT @ids := GROUP_CONCAT( id ) FROM sys_group WHERE FIND_IN_SET( parent_id, @ids ) ) AS cids
+            FROM
+            sys_group,
+            ( SELECT @ids := #{_sysGroup.id} ) b
+            WHERE
+            @ids IS NOT NULL
+            ) ID,
+            sys_group DATA
+            WHERE
+            FIND_IN_SET( DATA.id, ID._ids )
+            ORDER BY
+            id
+            )
+        </if>
+    </select>
+</mapper>

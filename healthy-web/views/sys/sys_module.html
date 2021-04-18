@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+	<meta charset="UTF-8">
+	<title>xxx</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+	<script src="../../js/public-source.js"></script>
+
+</head>
+<body>
+
+<div class="x-body" id="container" v-cloak>
+
+	<div class="conditions-box">
+		<div class="form-group">
+			<div class="input-group form-group-sm">
+				<div class="input-group-addon">名称</div>
+				<input type="text" class="form-control" v-model="q.name" placeholder="请输入模块名称" autocomplete="off" @keyup.enter="query">
+			</div>
+		</div>
+		<button type="button" class="layui-btn layui-btn-normal"  @click="query">查询<i class="icon iconfont">&#xe618;</i></button>
+		<button type="reset" class="layui-btn layui-btn-primary" @click.prevent="reset">重置<i class="icon iconfont">&#xe628;</i></button>
+	</div>
+
+	<div class="table-box">
+		<div class="layui-btn-group table-handle">
+			<button class="layui-btn layui-btn-normal" @click="add" v-if="hasPermissions('sysModule:edit')">
+				<i class="icon iconfont">&#xe616;</i>新增
+			</button>
+			<button class="layui-btn layui-btn-normal" @click="update" v-if="hasPermissions('sysModule:edit')">
+				<i class="icon iconfont">&#xe627;</i>修改
+			</button>
+			<button class="layui-btn layui-btn-danger layui-btn-sm" @click="del" v-if="hasPermissions('sysModule:delete')">
+				<i class="icon iconfont">&#xe625;</i>删除
+			</button>
+			<button class="layui-btn layui-btn-danger layui-btn-sm" @click="relevance" v-if="hasPermissions('sysModule:relevance')">
+				<i class="icon iconfont">&#xe652;</i>模块关联
+			</button>
+		</div>
+		<table id="tableData" lay-filter="sortTable" ></table>
+
+	</div>
+
+	<div id="modeopen" class="write-box" style="display: none">
+		<div>
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>模块名称</div>
+				<div>
+					<input type="text" class="form-control " v-model="sysModule.name" placeholder="模块名称" autocomplete="off" id="nameInput">
+				</div>
+			</div>
+
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>模块编码</div>
+				<div>
+					<input type="text" class="form-control " v-model="sysModule.code" placeholder="模块编码" autocomplete="off" id="codeInput">
+				</div>
+			</div>
+
+			<div>
+				<div>模块图片路径</div>
+				<div>
+					<input type="text" class="form-control " v-model="sysModule.imageUrl" placeholder="模块图片路径" autocomplete="off">
+				</div>
+			</div>
+
+			<div>
+				<div>备注</div>
+				<div>
+					<input type="text" class="form-control " v-model="sysModule.remark" placeholder="备注" autocomplete="off">
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!--<div v-show="!showList">
+		<div class="panel panel-default">
+			<div class="panel-heading">{{title}}</div>
+			<div class="panel-body">
+				<form class="form-horizontal col-sm-6">
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label">模块名称</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control " v-model="sysModule.name" placeholder="模块名称" autocomplete="off" id="nameInput">
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label">模块编码</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control " v-model="sysModule.code" placeholder="模块编码" autocomplete="off" id="codeInput">
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label">模块图片路径</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control " v-model="sysModule.imageUrl" placeholder="模块图片路径" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label">备注</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control " v-model="sysModule.remark" placeholder="备注" autocomplete="off">
+					</div>
+				</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button class="layui-btn" @click.prevent="saveOrUpdate" v-if="hasPermissions('sysModule:edit')">保存</button>
+							<button type="reset" class="layui-btn layui-btn-warm" @click="reload">返回</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>-->
+
+	<div id="relevanceLayer" class="x-body" style="display: none">
+		<div class="panel panel-default">
+			<div class="panel-heading">选择关联的种类和菜单</div>
+			<div class="panel-body">
+				<div class="alert alert-success" role="alert" style="text-align: left">
+					<h5>说明:</h5>
+					<h6>这里允许不勾选菜单和种类,若不勾选,代表清除该模块关联</h6>
+					<h6>菜单已经筛选为角色权限下的0级菜单</h6>
+				</div>
+				<form class="form-horizontal col-lg-12">
+					<div class="form-group form-group-sm">
+						<label class="col-sm-2 control-label">可选设备种类</label>
+						<div class="col-sm-10">
+							<template v-for='deviceCategory in canSelectDeviceCategories'>
+								<div class="col-sm-3">
+									<input type="checkbox" :value="deviceCategory.id" v-model="moduleDeviceCategoryIds">{{deviceCategory.name}}
+								</div>
+							</template>
+						</div>
+					</div>
+					<div class="form-group form-group-sm">
+						<label class="col-sm-2 control-label">可选菜单</label>
+						<div class="col-sm-10">
+							<template v-for='menu in canSelectMenus'>
+								<div class="col-sm-3">
+									<input type="checkbox" :value="menu.id" v-model="moduleMenuIds">{{menu.name}}
+								</div>
+							</template>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button class="layui-btn" @click.prevent="saveRelevance">保存</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+	var timeStr = new Date().getTime();
+	var str = '<script src="../../js/sys/sys_module.js?v="'+timeStr+'"><\/script>';
+	document.write(str)
+</script>
+</body>
+</html>

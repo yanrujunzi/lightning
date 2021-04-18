@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+	<meta charset="UTF-8">
+	<title>角色详情</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+</head>
+<body>
+<link rel="stylesheet" href="../../lib/jsonview/jquery.jsonview.css">
+<script src="../../js/public-source.js"></script>
+<div class="x-body" id="container" v-cloak>
+
+	<form class="form-horizontal col-sm-12" role="form">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">角色名</label>
+			<div class="col-sm-10">
+				<p class="form-control-static">{{sysRole.roleCnName}}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">角色编码</label>
+			<div class="col-sm-10">
+				<p class="form-control-static">{{sysRole.roleName}}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">状态</label>
+			<div class="col-sm-10">
+				<p class="form-control-static">{{sysRole.status == 1 ? '启用' : '禁用'}}</p>
+			</div>
+		</div>
+		<!--<div class="form-group">
+			<label class="col-sm-2 control-label">菜单权限</label>
+			<div class="col-sm-10">
+				<p class="form-control-static" id="menuJsonView"></p>
+			</div>
+		</div>-->
+		<div class="form-group">
+			<label class="col-sm-2 control-label">创建时间</label>
+			<div class="col-sm-10">
+				<p class="form-control-static">{{sysRole.createTime}}</p>
+			</div>
+		</div>
+	</form>
+
+</div>
+
+<script type="text/javascript" src="../../lib/jsonview/jquery.jsonview.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/sys/sys_role_detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+	<meta charset="UTF-8">
+	<title>xxx</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+</head>
+<body>
+<script src="../../js/public-source.js"></script>
+	<div class="x-body" id="container" v-cloak>
+
+		<div class="conditions-box">
+        	<div class="form-group">
+            	<div class="input-group form-group-sm">
+                	<span class="input-group-addon">人员姓名</span>
+                	<input type="text" class="form-control" v-model="q.name" @keyup.enter="reload" placeholder="人员姓名" autocomplete="off">
+				</div>
+		</div>
+		<div class="form-group">
+        	<div class="input-group form-group-sm">
+            	<span class="input-group-addon">与本人关系</span>
+                <input type="text" class="form-control" v-model="q.relationship" @keyup.enter="reload" placeholder="与本人关系" autocomplete="off">
+        	</div>
+		</div>
+		<div class="form-group">
+			<div class="input-group form-group-sm">
+				<span class="input-group-addon">记录日期</span>
+				<input type="text" class="form-control" v-model="q.dateRecord"
+						   id="qDateRecord" placeholder="开始时间" autocomplete="off">
+			</div>
+		</div>
+        <button type="button" class="layui-btn layui-btn-normal" @click.prevent="reload" >查询<i class="icon iconfont">&#xe618;</i></button>
+		<button type="reset" class="layui-btn layui-btn-primary" @click.prevent="reset" >重置<i class="icon iconfont">&#xe628;</i></button>
+    </div>
+
+
+    <div class="table-box">
+        <!--表格头部操作-->
+        <div class="layui-btn-group table-handle">
+            <button class="layui-btn layui-btn-normal" @click="add"
+                    data-type="getCheckData"><i class="icon iconfont">&#xe616;</i>新增
+            </button>
+            <button class="layui-btn layui-btn-normal" @click="update"
+                    data-type="getCheckLength" @click="getCheckData"><i
+                    class="icon iconfont">&#xe627;</i>编辑
+            </button>
+            <button class="layui-btn layui-btn-danger" @click="del"
+                    data-type="getCheckDel" @click="openDom"><i
+                    class="icon iconfont">&#xe625;</i>删除
+            </button>
+        </div>
+        <table class="layui-hide" id="tableData" ></table>
+        <!--表格内部操作-->
+        <script type="text/html" id="barTool">
+            <a class="table-inline-handle" @click="update"  lay-event="edit"><i
+                    class="icon iconfont">&#xe624;</i></a>
+            <a class="table-inline-handle" @click="del"  lay-event="del"><i
+                    class="icon iconfont">&#xe625;</i></a>
+        </script>
+    </div>
+
+	<div id="modeopen" class="write-box" style="display: none">
+		<div>
+			<div v-show="false">
+				<div>ID</div>
+				<div>
+					<input type="text" class="form-control" v-model="bodyChangeLog.idBodyLog" placeholder="ID" autocomplete="off">
+				</div>
+			</div>
+			<div v-show="false">
+				<div>ID</div>
+				<div>
+					<input type="text" class="form-control" v-model="bodyChangeLog.idBody" id="idBody" placeholder="IDBody" autocomplete="off">
+				</div>
+			</div>
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>人员姓名</div>
+				<div>
+					<input type="text" class="form-control"  v-model="bodyChangeLog.name" placeholder="人员姓名"
+						   autocomplete="off" id="bodyChangeLogName" readonly="readonly" @click="selectBody">
+				</div>
+			</div>
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>与本人关系</div>
+				<div>
+					<select v-model="bodyChangeLog.relationship" class="form-control" disabled="disabled" id="relationship">
+						<option value="01">本人</option>
+						<option value="02">子女</option>
+						<option value="03">父母</option>
+						<option value="04">配偶</option>
+						<option value="05">朋友</option>
+					</select>
+				</div>
+			</div>
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>身高(cm)</div>
+				<div>
+					<input type="text" class="form-control" v-model="bodyChangeLog.height" placeholder="身高(cm)"
+						   autocomplete="off" id="height" readonly="readonly">
+				</div>
+			</div>
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>实时体重</div>
+				<div>
+					<input type="text" class="form-control " v-model="bodyChangeLog.weight" placeholder="实时体重"
+						   autocomplete="off" id="weight" >
+				</div>
+			</div>
+			<div>
+				<div>水份含量</div>
+				<div>
+					<input type="text" class="form-control " v-model="bodyChangeLog.waterContent" placeholder="水份含量"
+						   autocomplete="off" id="waterContent" >
+				</div>
+			</div>
+			<div>
+				<div>体脂比例</div>
+				<div>
+					<input type="text" class="form-control " v-model="bodyChangeLog.bodyFat" placeholder="体脂比例"
+						   autocomplete="off" id="bodyFat" >
+				</div>
+			</div>
+			<div>
+				<div>肌肉(kg)</div>
+				<div>
+					<input type="text" class="form-control " v-model="bodyChangeLog.muscle" placeholder="肌肉(kg)"
+						   autocomplete="off" id="muscle" >
+				</div>
+			</div>
+			<div>
+				<div>蛋白质含量</div>
+				<div>
+					<input type="text" class="form-control " v-model="bodyChangeLog.protein" placeholder="蛋白质含量"
+						   autocomplete="off" id="protein" >
+				</div>
+			</div>
+			<div>
+				<div>BMI指标</div>
+				<div>
+					<input type="text" class="form-control " v-model="bodyChangeLog.bmi" placeholder="BMI指标"
+						   autocomplete="off" id="bmi" >
+				</div>
+			</div>
+			<div>
+				<div><i class="layui-icon required-red layui-icon-rate-solid"></i>记录日期</div>
+				<div>
+					<input id="dateRecord" type="text" class="form-control " v-model="bodyChangeLog.dateRecord" placeholder="记录日期" autocomplete="off" readonly="readonly">
+					<i></i>
+				</div>
+			</div>
+			<div v-show="false">
+				<div>创建时间</div>
+				<div>
+					<input type="text" class="form-control " v-model="bodyChangeLog.dateCreate" placeholder="创建时间">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="../../js/body/body_change_log.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+spring:
+  main:
+    #tomcat不分配端口
+    web-application-type: none
+
+  datasource:
+    name: test
+    url: jdbc:mysql://127.0.0.1:3306/lightning?useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: Password1!
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      connection-init-sqls: set names utf8mb4;
+      initial-size: 10
+      min-idle: 10
+      max-active: 50
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall,slf4j
+      aop-patterns: com.uni.user.service.impl.*
+      filter:
+        stat:
+          slow-sql-millis: 500
+          merge-sql: true
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: root
+        login-password: root
+        reset-enable: true
+        allow:
+        deny:
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+
+dubbo:
+  application:
+    name: user-service
+  provider:
+    timeout: 120000
+  #    payload: 100000000 #此参数设置传输最大值，不建议设置，如果大传输需要多次调用取出
+  protocol:
+    port: -1 #-1代表dubbo自动获取可用端口2.4.0+支持
+    name: dubbo
+  scan:
+    basePackages: com.uni
+  registry:
+    address: zookeeper://127.0.0.1:2181
+
+mybatis-plus:
+
+  # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
+  # 如果是放在resource目录 classpath:/mapper/*Mapper.xml
+  mapper-locations: classpath*:mapping/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.uni.user.entity
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: INPUT
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: not_null
+      db-type: mysql
+      #数据库大写下划线转换
+      table-underline: true
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+    #刷新mapper 调试神器 生产环境禁止开启 测试环境可以开启
+    refresh: false
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    #配置JdbcTypeForNull
+    jdbc-type-for-null: 'null'
